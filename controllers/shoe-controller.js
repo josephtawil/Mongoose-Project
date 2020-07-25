@@ -1,5 +1,5 @@
 const Shoe = require('../models/shoe');
-const { db } = require('../models/shoe');
+const { db } = require('../models/shoe.js');
 
 module.exports = {
 
@@ -13,24 +13,50 @@ module.exports = {
 
         //using async and await 
 
-        const newShoe = new Shoe({brand: req.body.brand, price: req.body.price});
 
         try{
+            const newShoe = new Shoe({brand: req.body.brand, price: req.body.price});
         console.log(newShoe);
-        await newShoe.save();
-        res.send(newShoe);
+       let saveShoe =  await newShoe.save();
+        res.send(saveShoe);
         }
         catch(err){
             res.send(err);
         }
     },
 
-    getShoe: (req,res)=> {
-        Shoe.find().then((allShoes)=>{
-            res.send(allShoes);
-        }).catch((err)=>{
+    getShoe: async (req,res)=> {
+        // Shoe.find().then((allShoes)=>{
+        //     res.send(allShoes);
+        // }).catch((err)=>{
+        //     res.send(err);
+        // })
+        try
+        {
+            const allShoes = await Shoe.find();
+        allShoes[0].colorWay.push("blue");
+        // await allShoes.save();
+        res.send(allShoes);
+        }
+        catch(err){
             res.send(err);
-        })
+        }
     },
+
+    findShoe: (req,res)=> {
+        //can use find or findById
+        // Shoe.findById({_id: req.params.id})
+        // .then((foundShoe)=> res.send(foundShoe))
+        // .catch((err)=>res.send(err));
+        try
+        {
+        const foundShoe = await Shoe.findById(req.params.id);
+        res.send(foundShoe);
+        }
+        catch(err){
+            res.send(err);
+        }
+    },
+
 
 };

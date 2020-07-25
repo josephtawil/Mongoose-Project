@@ -17,7 +17,7 @@ const shoeSchema = new Schema({
     
     model: {
         type: String,
-        unique: "Cant have more of the same model"
+        // unique: "Cant have more of the same model"
     },
     
     colorWay: {
