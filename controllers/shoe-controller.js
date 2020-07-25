@@ -110,17 +110,21 @@ module.exports = {
     },
 
     addColorWay: async (req, res) => {
-        try{
-            const addColorWay = await Shoe.findById(req.body.id);
-            addColorWay.colorWay.push(req.body.colorWay);
-            console.log(req.body.colorWay);
-            console.log(addColorWay);
-            await addColorWay.save();
-            res.send(addColorWay);
-        }
-        catch(err){
-            res.send(err);
-        };
-    }
+        // try{
+        //     const addColorWay = await Shoe.findById(req.body.id);
+        //     addColorWay.colorWay.push(req.body.colorWay);
+        //     console.log(req.body.colorWay);
+        //     console.log(addColorWay);
+        //     await addColorWay.save();
+        //     res.send(addColorWay);
+        // }
+        // catch(err){
+        //     res.send(err);
+        // };
+
+        Shoe.findByIdAndUpdate(req.body.id,{$push:{colorWay: req.body.colorWay}})
+        .then((res)=>res.send(res))
+        .catch((err)=>res.send(err));
+    },
 
 };
