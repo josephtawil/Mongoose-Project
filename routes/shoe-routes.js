@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const {test} = require('../controllers/shoe-controller');
+const {addShoe} = require('../controllers/shoe-controller');
 
-router.get("/test", test);
+router.post("/addShoe", addShoe);
 
 module.exports = router;
