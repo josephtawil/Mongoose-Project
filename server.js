@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //we added those methods in the second parameter for the depreciation warning
-mongoose.connect("mongodb://localhost/shoe_db",{ useNewUrlParser: true, useUnifiedTopology: true  });
+mongoose.connect("mongodb://localhost/shoe_db",{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 const shoeRoutes = require("./routes/shoe-routes");
 app.use(shoeRoutes);

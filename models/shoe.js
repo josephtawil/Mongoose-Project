@@ -27,6 +27,19 @@ const shoeSchema = new Schema({
     },
 });
 
+//this will run BEFORE the instance is saved to the database
+shoeSchema.pre("Save",(next)=>{
+    console.log("This is going to save");
+    next();
+});
+
+
+shoeSchema.pre("remove", (next)=>{
+    console.log("This is going to delete");
+    next();
+});
+
+
 //we are naming our schema as Shoe
 const Shoe = mongoose.model("Shoe", shoeSchema);
 
